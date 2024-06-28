@@ -1,10 +1,10 @@
-package br.com.jardson.mscostomer;
+package br.com.jardson.mscustomer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MsCostomerApplicationTests {
+class MsCustomerApplicationTests {
 
 	@Test
 	void contextLoads() {
