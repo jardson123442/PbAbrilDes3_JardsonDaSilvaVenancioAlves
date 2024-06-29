@@ -1,4 +1,4 @@
-package br.com.jardson.mscustomer.config;
+package br.com.jardson.mscalculate.config;
 
 import org.springframework.context.annotation.Configuration;
 

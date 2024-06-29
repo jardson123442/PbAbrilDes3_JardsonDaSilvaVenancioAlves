@@ -1,6 +1,5 @@
 server:
-  port: 8081
-
+  port: 8082
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -14,13 +13,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
-
-services:
+  application:
+    name: mspayment
   rabbitmq:
-    image:  rabbitmq:3.13-management
-    ports:
-      - 15672:15672
-      - 5672:5672
-
-
-
+    port: 5672
+    stream:
+      username: guest
+      password: guest
