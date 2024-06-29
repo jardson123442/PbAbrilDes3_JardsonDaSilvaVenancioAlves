@@ -1,6 +1,7 @@
 package br.com.jardson.mscustomer.service;
 
 import br.com.jardson.mscustomer.entity.Customer;
+import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import br.com.jardson.mscustomer.exception.ResourceNotFoundException;
 import br.com.jardson.mscustomer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;

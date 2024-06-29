@@ -1,5 +1,7 @@
 package br.com.jardson.mscustomer.entity;
 
+import br.com.jardson.mscustomer.exception.InvalidGenderException;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,7 +19,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "costomers")
+@Table(name = "customers")
 public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -29,10 +34,11 @@ public class Customer implements Serializable {
     @Column(name = "name", nullable = false, length = 200)
     private String name;
 
-    @Column(name = "gender", nullable = false, length = 6)
+    @Column(name = "gender", length = 17)
     private Gender gender;
 
     @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date birthDate;
 
     @Column(unique = true, nullable = false)
@@ -43,5 +49,4 @@ public class Customer implements Serializable {
     public enum Gender {
         FEMALE, MALE
     }
-
 }

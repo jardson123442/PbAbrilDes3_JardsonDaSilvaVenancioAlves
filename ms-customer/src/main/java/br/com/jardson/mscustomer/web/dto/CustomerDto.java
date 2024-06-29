@@ -1,6 +1,7 @@
 package br.com.jardson.mscustomer.web.dto;
 
 import br.com.jardson.mscustomer.entity.Customer;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
@@ -30,12 +31,11 @@ public class CustomerDto {
     @Size(min = 3, message = "{Size.customerCreateDto.name}")
     private String name;
 
-    @NotBlank(message = "{NotBlank.customerCreateDto.gender}")
-    @Pattern(regexp = "^(FEMALE|MALE)$", message = "{Pattern.customerCreateDto.gender}")
+    @Size(min = 4, max = 17, message = "{Pattern.customerCreateDto.gender}")
     private Customer.Gender gender;
 
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date birthDate;
 
     @NotBlank(message = "{NotBlank.costomerCreateDto.email}")
