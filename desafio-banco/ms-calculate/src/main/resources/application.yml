@@ -1,12 +1,4 @@
 spring:
-  application:
-    name: mscalculate
-  rabbitmq:
-    port: 5672
-    stream:
-      username: guest
-      password: guest
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/customers?useTimezone=true&serverTimezone=UTC
@@ -18,15 +10,18 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-    show-sql: false
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://cursoms-eureka-user:123456@${EUREKA_SERVER}:8761/eureka
+    show-sql: true
+  rabbitmq:
+    port: 5672
+    stream:
+      username: guest
+      password: guest
+  application:
+    name: mscalculate
 
 server:
-  port: 8082
+  port: 8080
+
 
 
 
