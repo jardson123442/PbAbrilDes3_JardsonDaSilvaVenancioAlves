@@ -7,6 +7,11 @@ spring:
     url: jdbc:mysql://localhost:3306/customers?useTimezone=true&serverTimezone=UTC
     username: root
     password: 1234567
+  rabbitmq:
+    port: 5672
+    stream:
+      username: guest
+      password: guest
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,13 +19,6 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
-
-services:
-  rabbitmq:
-    image:  rabbitmq:3.13-management
-    ports:
-      - 15672:15672
-      - 5672:5672
 
 
 

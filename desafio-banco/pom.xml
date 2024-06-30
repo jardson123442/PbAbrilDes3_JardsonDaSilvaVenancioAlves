@@ -20,6 +20,7 @@
     <module>ms-customer</module>
     <module>ms-payment</module>
     <module>ms-calculate</module>
+    <module>eurekaserver</module>
   </modules>
 
   <properties>
@@ -85,6 +86,17 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+      <version>4.1.2</version>
     </dependency>
   </dependencies>
 
