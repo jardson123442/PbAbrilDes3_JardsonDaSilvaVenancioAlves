@@ -16,7 +16,6 @@ spring:
       username: guest
       password: guest
 
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -25,3 +24,9 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

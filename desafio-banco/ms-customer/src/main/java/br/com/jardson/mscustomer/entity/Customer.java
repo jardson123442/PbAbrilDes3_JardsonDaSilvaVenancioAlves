@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -43,7 +44,7 @@ public class Customer implements Serializable {
 
     @Column(unique = true, nullable = false)
     private String email;
-    private Integer points;
+    private BigDecimal points;
     private String url_photo;
 
     public enum Gender {

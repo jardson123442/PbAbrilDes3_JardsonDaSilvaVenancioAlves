@@ -23,7 +23,7 @@ public class CustomerService {
     }
 
     public Customer update(Long id, Customer customer) {
-        Customer entity = repository.getReferenceById(id);
+        Customer entity = repository.getById(id);
         updateData(entity, customer);
         return repository.save(entity);
     }

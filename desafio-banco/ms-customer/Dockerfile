@@ -7,6 +7,6 @@ FROM openjdk:17
 WORKDIR /app
 COPY --from=build ./app/target/*.jar ./app.jar
 
-ARG RABBITMQ_SERVER=projeto-banco
+ARG RABBITMQ_SERVER=banco
 
 ENTRYPOINT java -jar app.jar
