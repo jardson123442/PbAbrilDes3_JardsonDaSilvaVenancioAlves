@@ -4,12 +4,13 @@ import br.com.jardson.mscustomer.entity.Customer;
 import br.com.jardson.mscustomer.web.dto.CustomerDto;
 import br.com.jardson.mscustomer.web.dto.CustomerResponseDto;
 import org.modelmapper.ModelMapper;
+import org.springframework.web.bind.annotation.Mapping;
 
 public class DozerMapper {
 
     private static ModelMapper mapper = new ModelMapper();
 
-    public static Customer toCostomer(CustomerDto createDTO) {
+    public static Customer toCustomer(CustomerDto createDTO) {
         return new ModelMapper().map(createDTO, Customer.class);
     }
 

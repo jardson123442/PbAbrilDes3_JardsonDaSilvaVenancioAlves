@@ -1,6 +1,7 @@
 package br.com.jardson.mscustomer.service;
 
 import br.com.jardson.mscustomer.entity.Customer;
+import br.com.jardson.mscustomer.exception.CpfAlreadyExistsException;
 import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import br.com.jardson.mscustomer.exception.ResourceNotFoundException;
 import br.com.jardson.mscustomer.repository.CustomerRepository;
@@ -15,7 +16,7 @@ public class CustomerService {
 
     public Customer findById(Long id) {
         return repository.findById(id).orElseThrow(
-                () -> new RuntimeException("Usuário não encontrado."));
+                () -> new ResourceNotFoundException("Usuário não encontrado."));
     }
 
     public Customer save(Customer dto) {

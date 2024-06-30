@@ -1,6 +1,7 @@
 package br.com.jardson.mscustomer.web;
 
 import br.com.jardson.mscustomer.entity.Customer;
+import br.com.jardson.mscustomer.exception.CpfAlreadyExistsException;
 import br.com.jardson.mscustomer.service.CustomerService;
 import br.com.jardson.mscustomer.web.controller.CustomerController;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +43,7 @@ public class CustomerControllerTest {
   private CustomerService customerService;
 
   @Test
-  public void createCustomer_WithValidData_ReturnsCreated() throws Exception {
+  public void createCustomer_WithValidData_ReturnsCreated() throws Exception, CpfAlreadyExistsException {
     when(customerService.save(CUSTOMER)).thenReturn(CUSTOMER);
 
     mockMvc
@@ -85,7 +86,7 @@ public class CustomerControllerTest {
   }
 
   @Test
-  public void createCustomer_WithExistingName_ReturnsConflict() throws Exception {
+  public void createCustomer_WithExistingName_ReturnsConflict() throws Exception, CpfAlreadyExistsException {
     when(customerService.save(any())).thenThrow(DataIntegrityViolationException.class);
 
     mockMvc

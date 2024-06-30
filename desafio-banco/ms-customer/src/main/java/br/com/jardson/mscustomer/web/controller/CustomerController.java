@@ -1,6 +1,8 @@
 package br.com.jardson.mscustomer.web.controller;
 
 import br.com.jardson.mscustomer.entity.Customer;
+import br.com.jardson.mscustomer.exception.CpfAlreadyExistsException;
+import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import br.com.jardson.mscustomer.service.CustomerService;
 import br.com.jardson.mscustomer.web.dto.CustomerDto;
 import br.com.jardson.mscustomer.web.dto.CustomerResponseDto;
@@ -53,7 +55,7 @@ public class CustomerController {
             })
     @PostMapping
     public ResponseEntity<CustomerResponseDto> create(@RequestBody CustomerDto customerDto) {
-        Customer customer = service.save(DozerMapper.toCostomer(customerDto));
+        Customer customer = service.save(DozerMapper.toCustomer(customerDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(DozerMapper.toDto(customer));
     }
 
