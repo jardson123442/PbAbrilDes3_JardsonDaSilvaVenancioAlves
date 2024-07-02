@@ -14,7 +14,7 @@ public class CustomerResponseDto {
 
     private String cpf;
     private String name;
-    private Customer.Gender gender;
+    private String gender;
     private Date birthDate;
     private String email;
     private Integer points;

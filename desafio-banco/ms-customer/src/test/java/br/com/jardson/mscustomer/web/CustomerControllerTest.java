@@ -21,13 +21,13 @@ import java.util.Optional;
 
 import static br.com.jardson.mscustomer.common.CustomerConstants.CUSTOMER;
 import static br.com.jardson.mscustomer.common.CustomerConstants.INVALID_CUSTOMER;
-import static br.com.jardson.mscustomer.entity.Customer.Gender.MALE;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,16 +42,23 @@ public class CustomerControllerTest {
   @MockBean
   private CustomerService customerService;
 
+
   @Test
-  public void createCustomer_WithValidData_ReturnsCreated() throws Exception, CpfAlreadyExistsException {
+  public void createCustomer_WithValidData_ReturnsCreated() throws Exception {
     when(customerService.save(CUSTOMER)).thenReturn(CUSTOMER);
 
     mockMvc
-        .perform(
-            post("/customers")
-                .contentType(MediaType.APPLICATION_JSON))
-        .andExpect(status().isCreated())
-        .andExpect(jsonPath("$").value(CUSTOMER));
+            .perform(
+                    post("/v1/customers")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(objectMapper.writeValueAsString(CUSTOMER)))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.id").value(CUSTOMER.getId()))
+            .andExpect(jsonPath("$.name").value(CUSTOMER.getName()))
+            .andExpect(jsonPath("$.cpf").value(CUSTOMER.getCpf()))
+            .andExpect(jsonPath("$.gender").value(CUSTOMER.getGender()))
+            .andExpect(jsonPath("$.email").value(CUSTOMER.getEmail()));
+
 
     assertNotNull(CUSTOMER);
 
@@ -65,7 +72,7 @@ public class CustomerControllerTest {
 
     assertEquals("John Doe", CUSTOMER.getName());
     assertEquals("12345678900", CUSTOMER.getCpf());
-    assertEquals(MALE, CUSTOMER.getGender());
+    assertEquals("MALE", CUSTOMER.getGender());
     assertEquals("john.doe@example.com", CUSTOMER.getEmail());
   }
 
@@ -98,7 +105,7 @@ public class CustomerControllerTest {
 
   @Test
   public void getCustomer_ByExistingId_ReturnsCustomer() throws Exception {
-    when(customerService.findById(1L)).thenReturn(CUSTOMER);
+    when(customerService.getById(1L)).thenReturn(CUSTOMER);
 
     mockMvc
         .perform(
@@ -132,7 +139,7 @@ public class CustomerControllerTest {
 
     doThrow(new EmptyResultDataAccessException(1)).when(customerService).delete(CustomerId);
 
-    mockMvc.perform(delete("/Customers/" + CustomerId))
+    mockMvc.perform(delete("/customers/" + CustomerId))
         .andExpect(status().isNotFound());
   }
 }

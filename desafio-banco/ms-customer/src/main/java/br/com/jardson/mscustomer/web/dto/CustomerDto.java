@@ -4,16 +4,14 @@ import br.com.jardson.mscustomer.entity.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -32,11 +30,11 @@ public class CustomerDto {
     private String name;
 
     @Size(min = 4, max = 17, message = "{Pattern.customerCreateDto.gender}")
-    private Customer.Gender gender;
+    private String gender;
 
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date birthDate;
+    @NotNull
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDate birthDate;
 
     @NotBlank(message = "{NotBlank.costomerCreateDto.email}")
     @Email(message = "{Email.costomerCreateDto.email}",  regexp = "^[a-z0-9.+-]+@gmail\\.com$")

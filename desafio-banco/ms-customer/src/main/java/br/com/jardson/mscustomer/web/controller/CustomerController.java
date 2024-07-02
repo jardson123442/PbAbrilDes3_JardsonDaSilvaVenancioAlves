@@ -1,8 +1,6 @@
 package br.com.jardson.mscustomer.web.controller;
 
 import br.com.jardson.mscustomer.entity.Customer;
-import br.com.jardson.mscustomer.exception.CpfAlreadyExistsException;
-import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import br.com.jardson.mscustomer.service.CustomerService;
 import br.com.jardson.mscustomer.web.dto.CustomerDto;
 import br.com.jardson.mscustomer.web.dto.CustomerResponseDto;
@@ -39,7 +37,7 @@ public class CustomerController {
             })
     @GetMapping("/{id}")
     public ResponseEntity<CustomerResponseDto> getById(@PathVariable Long id) {
-        Customer customer = service.findById(id);
+        Customer customer = service.getById(id);
         CustomerResponseDto customerDto = DozerMapper.toDto(customer);
         return ResponseEntity.ok(customerDto);
     }

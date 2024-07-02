@@ -1,6 +1,5 @@
 package br.com.jardson.mscustomer.entity;
 
-import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,11 +8,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+
 
 @Entity
 @Getter
@@ -36,18 +34,14 @@ public class Customer implements Serializable {
     private String name;
 
     @Column(name = "gender", length = 17)
-    private Gender gender;
+    private String gender;
 
     @Column(nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(unique = true, nullable = false)
     private String email;
-    private BigDecimal points;
+    private Integer points = 0;
     private String url_photo;
 
-    public enum Gender {
-        FEMALE, MALE
-    }
 }

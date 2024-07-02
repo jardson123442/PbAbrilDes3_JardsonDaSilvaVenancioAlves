@@ -14,7 +14,7 @@ public class CustomerService {
     @Autowired
     public CustomerRepository repository;
 
-    public Customer findById(Long id) {
+    public Customer getById(Long id) {
         return repository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Usuário não encontrado."));
     }
@@ -39,7 +39,7 @@ public class CustomerService {
     private void updateData(Customer entity, Customer customer) {
         entity.setName(customer.getName());
         entity.setEmail(customer.getEmail());
-        entity.setBirthDate(customer.getBirthDate());
+        //entity.setBirthDate(customer.getBirthDate());
         entity.setGender(customer.getGender());
     }
 }

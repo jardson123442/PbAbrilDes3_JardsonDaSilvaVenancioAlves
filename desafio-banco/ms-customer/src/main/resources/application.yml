@@ -33,3 +33,7 @@ eureka:
     name: mscustomer
 
 
+  jackson:
+    time-zone: America/Sao_Paulo
+
+
