@@ -6,13 +6,9 @@ import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import br.com.jardson.mscustomer.exception.ResourceNotFoundException;
 import br.com.jardson.mscustomer.repository.CustomerRepository;
 import com.amazonaws.services.s3.AmazonS3;
-import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Service
 public class CustomerService {
@@ -27,13 +23,15 @@ public class CustomerService {
     public CustomerRepository repository;
 
     public Customer getById(Long id) {
-        return repository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Usuário não encontrado."));
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not found with id " + id));
     }
 
     public Customer save(Customer dto) {
         if (repository.existsCustomerByCpf(dto.getCpf())) {
-            throw new RuntimeException("CPF already exists.");
+            throw new CpfAlreadyExistsException("CPF already exists.");
+        }
+        if (!dto.getGender().equalsIgnoreCase("Female") && !dto.getGender().equalsIgnoreCase("Male")) {
+            throw new InvalidGenderException("Gender must be either 'Female' or 'Male'.");
         }
         String imgUrl = null;
         dto.setUrl_photo(imgUrl);

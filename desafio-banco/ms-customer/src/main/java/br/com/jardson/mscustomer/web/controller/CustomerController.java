@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springdoc.api.ErrorMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class CustomerController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @GetMapping("/{id}")
-    public ResponseEntity<CustomerResponseDto> getById(@PathVariable Long id) {
+    public ResponseEntity<CustomerResponseDto> getById(@PathVariable(value = "id") Long id) {
         Customer customer = service.getById(id);
         CustomerResponseDto customerDto = DozerMapper.toDto(customer);
         return ResponseEntity.ok(customerDto);
@@ -52,7 +53,7 @@ public class CustomerController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
-    public ResponseEntity<CustomerResponseDto> create(@RequestBody CustomerDto customerDto) {
+    public ResponseEntity<CustomerResponseDto> create(@RequestBody @Valid CustomerDto customerDto) {
         Customer customer = service.save(DozerMapper.toCustomer(customerDto));
         return ResponseEntity.status(HttpStatus.CREATED).body(DozerMapper.toDto(customer));
     }

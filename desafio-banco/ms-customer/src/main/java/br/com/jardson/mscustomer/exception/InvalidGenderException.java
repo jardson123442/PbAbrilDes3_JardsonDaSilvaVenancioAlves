@@ -1,8 +1,11 @@
 package br.com.jardson.mscustomer.exception;
 
-public class InvalidGenderException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-    public InvalidGenderException(String exception) {
-        super(exception);
+@ResponseStatus(HttpStatus.BAD_REQUEST)
+public class InvalidGenderException extends RuntimeException {
+    public InvalidGenderException(String message) {
+        super(message);
     }
 }

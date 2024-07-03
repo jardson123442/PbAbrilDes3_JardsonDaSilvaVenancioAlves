@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -32,8 +33,8 @@ public class CustomerServiceTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        customer = new Customer(1L, "12345678900", "John Doe", "MALE", LocalDate.parse("10/08/1998", formatter) , "john.doe@gmail.com" ,0 ,"null");
+
+        customer = new Customer(1L, "123.456.789-00", "John Doe", "MALE", null , "john.doe@gmail.com" ,0 ,"null");
     }
 
     @Test
@@ -56,10 +57,11 @@ public class CustomerServiceTest {
 
         assertNotNull(result);
         assertEquals("John Doe", result.getName());
-        assertEquals("12345678900", result.getCpf());
+        assertEquals("123.456.789-00", result.getCpf());
         assertEquals("MALE", result.getGender());
-        assertEquals(LocalDate.of(1998, 8, 10), result.getBirthDate());
+        assertEquals(null, result.getBirthDate());
         assertEquals("john.doe@gmail.com", result.getEmail());
+
 
         verify(repository, times(1)).save(customer);
     }

@@ -13,6 +13,7 @@ import java.util.TimeZone;
 
 @EnableRabbit
 @SpringBootApplication
+@EnableFeignClients
 public class MsCustomerApplication {
 
 	public static void main(String[] args) {

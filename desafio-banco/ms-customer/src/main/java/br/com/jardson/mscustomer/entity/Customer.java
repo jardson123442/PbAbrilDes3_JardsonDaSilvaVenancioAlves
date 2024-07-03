@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -36,8 +37,9 @@ public class Customer implements Serializable {
     @Column(name = "gender", length = 17)
     private String gender;
 
-    @Column(nullable = false)
-    private LocalDate birthDate;
+    //@Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private Date birthDate;
 
     @Column(unique = true, nullable = false)
     private String email;

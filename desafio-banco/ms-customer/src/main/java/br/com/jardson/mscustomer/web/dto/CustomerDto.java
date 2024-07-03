@@ -2,6 +2,7 @@ package br.com.jardson.mscustomer.web.dto;
 
 import br.com.jardson.mscustomer.entity.Customer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.*;
@@ -22,18 +23,20 @@ public class CustomerDto {
 
     private Long id;
 
-    @Size(min = 11, max = 15, message = "{Size.clienteCreateDto.cpf}")
+    @NotNull(message = "CPF is required")
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "CPF must be in the format XXX.XXX.XXX-XX")
     private String cpf;
 
     @NotBlank(message = "{NotBlank.costomerCreateDto.nome}")
     @Size(min = 3, message = "{Size.customerCreateDto.name}")
     private String name;
 
-    @Size(min = 4, max = 17, message = "{Pattern.customerCreateDto.gender}")
+    @NotNull(message = "Gender is required")
+    //@Pattern(regexp = "Female|Male", message = "Gender must be either Female or Male")
     private String gender;
 
-    @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    //@NotNull
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
 
     @NotBlank(message = "{NotBlank.costomerCreateDto.email}")

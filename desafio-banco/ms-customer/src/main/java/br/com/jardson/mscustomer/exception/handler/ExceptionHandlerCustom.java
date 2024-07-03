@@ -1,9 +1,6 @@
 package br.com.jardson.mscustomer.exception.handler;
 
-import br.com.jardson.mscustomer.exception.ExceptionResponse;
-import br.com.jardson.mscustomer.exception.InvalidGenderException;
-import br.com.jardson.mscustomer.exception.RequiredObjectIsNullException;
-import br.com.jardson.mscustomer.exception.ResourceNotFoundException;
+import br.com.jardson.mscustomer.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -18,7 +15,7 @@ import java.util.Date;
 @RestController
 public class ExceptionHandlerCustom extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
+    /*@ExceptionHandler(Exception.class)
     public final ResponseEntity<ExceptionResponse> handleAllExceptions(
             Exception ex, WebRequest request) {
 
@@ -28,7 +25,7 @@ public class ExceptionHandlerCustom extends ResponseEntityExceptionHandler {
                 request.getDescription(false));
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    }*/
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(
@@ -43,15 +40,13 @@ public class ExceptionHandlerCustom extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(InvalidGenderException.class)
-    public final ResponseEntity<ExceptionResponse> handleCpfDuplicatedExceptions(
-            Exception ex, WebRequest request) {
+    public ResponseEntity<String> handleInvalidGenderException(InvalidGenderException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(
-                new Date(),
-                ex.getMessage(),
-                request.getDescription(false));
-
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.CONFLICT);
+    @ExceptionHandler(CpfAlreadyExistsException.class)
+    public ResponseEntity<String> handleCpfAlreadyExistsException(CpfAlreadyExistsException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(RequiredObjectIsNullException.class)

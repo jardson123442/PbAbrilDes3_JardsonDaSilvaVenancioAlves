@@ -7,28 +7,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Payment implements Serializable {
+@Table(name = "rules")
+public class Rules implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
-    @Column(name = "CUSTOMER_ID")
-    private String customer;
-    @Column(name = "CATEGORY")
-    private String category;
-    @Column(name = "TOTAL")
-    private Integer total;
-    @Column(name = "CREATED_DATE")
-    private LocalDateTime createdDate = LocalDateTime.now();
+    private Long id;
 
+    @Column(nullable = false, length = 30, unique = true)
+    private String category;
+
+    @Column(nullable = false, length = 3)
+    private Double parity;
 }
