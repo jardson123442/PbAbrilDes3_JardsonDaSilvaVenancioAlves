@@ -16,6 +16,15 @@ spring:
     stream:
       username: guest
       password: guest
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+
+file:
+  upload-dir: /Jardson/upload
 
 server:
   port: 8080
@@ -36,4 +45,8 @@ eureka:
   jackson:
     time-zone: America/Sao_Paulo
 
+aws:
+  region: us-east-1
 
+  bucket:
+    name: jard-bank-photo

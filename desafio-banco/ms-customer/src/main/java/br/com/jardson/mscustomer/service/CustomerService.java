@@ -5,11 +5,23 @@ import br.com.jardson.mscustomer.exception.CpfAlreadyExistsException;
 import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import br.com.jardson.mscustomer.exception.ResourceNotFoundException;
 import br.com.jardson.mscustomer.repository.CustomerRepository;
+import com.amazonaws.services.s3.AmazonS3;
+import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class CustomerService {
+
+    @Value("${aws.bucket.name}")
+    private String bucketName;
+
+    @Autowired
+    private AmazonS3 s3Client;
 
     @Autowired
     public CustomerRepository repository;
@@ -20,6 +32,12 @@ public class CustomerService {
     }
 
     public Customer save(Customer dto) {
+        if (repository.existsCustomerByCpf(dto.getCpf())) {
+            throw new RuntimeException("CPF already exists.");
+        }
+        String imgUrl = null;
+        dto.setUrl_photo(imgUrl);
+
         return repository.save(dto);
     }
 
