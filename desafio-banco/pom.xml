@@ -20,7 +20,6 @@
     <module>ms-customer</module>
     <module>ms-payment</module>
     <module>ms-calculate</module>
-    <module>eurekaserver</module>
   </modules>
 
   <properties>

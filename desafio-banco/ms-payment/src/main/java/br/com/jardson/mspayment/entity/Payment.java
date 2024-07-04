@@ -22,11 +22,11 @@ public class Payment implements Serializable {
     @Id
     private UUID id;
     @Column(name = "CUSTOMER_ID")
-    private String customeriD;
+    private Long customeriD;
     @Column(name = "CATEGORY")
-    private String category;
+    private Long category;
     @Column(name = "TOTAL")
-    private Integer total;
+    private Double total;
     @Column(name = "CREATED_DATE")
     private LocalDateTime createdDate = LocalDateTime.now();
 

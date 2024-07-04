@@ -1,8 +1,8 @@
 package br.com.jardson.mspayment.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,11 +10,15 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Customer {
 
-    private Long customerId;
+
+    private String cpf;
     private String name;
+    private String gender;
     private Date birthDate;
-    private Payment payment;
-    private BigDecimal points;
+    private String email;
+    private Integer points;
+    private String url_photo;
 }

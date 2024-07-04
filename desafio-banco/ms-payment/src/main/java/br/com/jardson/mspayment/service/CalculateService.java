@@ -6,6 +6,7 @@ import br.com.jardson.mspayment.entity.Rules;
 import br.com.jardson.mspayment.service.payments.CustomerPaymentService;
 import br.com.jardson.mspayment.service.payments.RulesPayment;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -13,18 +14,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CalculateService {
 
-    public final CustomerPaymentService customerPaymentService;
-    private final RulesPayment rulesService;
 
-    public CustomerPayment getCalculateCustomerPayment(Long idCustomer, Long idCategory, Double points) {
-        ResponseEntity<Rules> rules = rulesService.getById(idCategory);
-        ResponseEntity<Customer> customer = customerPaymentService.getCustomerById(idCustomer);
 
-        CustomerPayment customerPayment = new CustomerPayment();
-        customerPayment.setCustomer(customer.getBody());
-        customerPayment.setCategory(rules.getBody());
-        customerPayment.setPoints(points);
-
-        return customerPayment;
-    }
 }
