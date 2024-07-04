@@ -7,7 +7,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableRabbit
 @SpringBootApplication
-@EnableFeignClients
 public class MsCustomerApplication {
 
 	public static void main(String[] args) {
