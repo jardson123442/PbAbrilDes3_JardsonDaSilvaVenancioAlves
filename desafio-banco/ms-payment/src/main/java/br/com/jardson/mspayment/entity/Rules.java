@@ -20,10 +20,6 @@ public class Rules implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false, length = 30, unique = true)
     private String category;
-
-    @Column(nullable = false, length = 3)
     private Double parity;
 }

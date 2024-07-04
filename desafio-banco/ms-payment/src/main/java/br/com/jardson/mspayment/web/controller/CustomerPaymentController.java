@@ -1,6 +1,6 @@
 package br.com.jardson.mspayment.web.controller;
 
-import br.com.jardson.mspayment.entity.CustomerEndpoint;
+import br.com.jardson.mspayment.service.CalculateOrderCustomerEndpoint;
 import br.com.jardson.mspayment.entity.CustomerPayment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerPaymentController {
 
     @Autowired
-    CustomerEndpoint customerEndpoint;
+    CalculateOrderCustomerEndpoint calculateOrderCustomerEndpoint;
 
-    @GetMapping
+    /*@GetMapping
     public CustomerPayment getCustomerPayment() {
-        return customerEndpoint.getCustomer();
-    }
+        return calculateOrderCustomerEndpoint.getCustomer();
+    }*/
 }
