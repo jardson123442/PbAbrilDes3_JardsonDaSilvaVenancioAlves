@@ -7,9 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class ResponseDto {
+public class TotalResponseDto {
 
-    public String category;
-    public Double parity;
-
+    public Double total;
 }

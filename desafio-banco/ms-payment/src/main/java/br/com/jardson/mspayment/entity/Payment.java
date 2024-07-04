@@ -22,7 +22,7 @@ public class Payment implements Serializable {
     @Id
     private UUID id;
     @Column(name = "CUSTOMER_ID")
-    private String customer;
+    private String customeriD;
     @Column(name = "CATEGORY")
     private String category;
     @Column(name = "TOTAL")

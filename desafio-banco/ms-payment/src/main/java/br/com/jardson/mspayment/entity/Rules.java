@@ -1,25 +1,14 @@
 package br.com.jardson.mspayment.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.io.Serializable;
-
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-@Table(name = "rules")
-public class Rules implements Serializable {
-    private static final long serialVersionUID = 1L;
+@NoArgsConstructor
+public class Rules {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String category;
-    private Double parity;
+    private Long categoryId;
+    private Double value;
 }

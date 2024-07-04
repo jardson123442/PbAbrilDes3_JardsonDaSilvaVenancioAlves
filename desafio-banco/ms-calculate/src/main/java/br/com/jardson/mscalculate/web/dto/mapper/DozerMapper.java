@@ -1,7 +1,7 @@
 package br.com.jardson.mscalculate.web.dto.mapper;
 
 import br.com.jardson.mscalculate.entity.Rules;
-import br.com.jardson.mscalculate.web.dto.ResponseDto;
+import br.com.jardson.mscalculate.web.dto.RulesResponseDto;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ public class DozerMapper {
         return new ModelMapper().map(createDTO, Rules.class);
     }
 
-    public static ResponseDto toDto(Rules customer) {
+    public static RulesResponseDto toDto(Rules customer) {
         ModelMapper mapper = new ModelMapper();
-        return mapper.map(customer, ResponseDto.class);
+        return mapper.map(customer, RulesResponseDto.class);
     }
 
     public static <O, D> D parseObject(O origin, Class<D> destination)

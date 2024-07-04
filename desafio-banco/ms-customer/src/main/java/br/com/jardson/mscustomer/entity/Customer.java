@@ -37,7 +37,7 @@ public class Customer implements Serializable {
     @Column(name = "gender", length = 17)
     private String gender;
 
-    //@Column(nullable = false)
+    @Column(nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date birthDate;
 

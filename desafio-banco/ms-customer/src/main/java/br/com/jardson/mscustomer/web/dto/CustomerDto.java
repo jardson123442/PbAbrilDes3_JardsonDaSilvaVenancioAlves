@@ -35,9 +35,10 @@ public class CustomerDto {
     //@Pattern(regexp = "Female|Male", message = "Gender must be either Female or Male")
     private String gender;
 
-    //@NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate birthDate;
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private Date birthDate;
 
     @NotBlank(message = "{NotBlank.costomerCreateDto.email}")
     @Email(message = "{Email.costomerCreateDto.email}",  regexp = "^[a-z0-9.+-]+@gmail\\.com$")

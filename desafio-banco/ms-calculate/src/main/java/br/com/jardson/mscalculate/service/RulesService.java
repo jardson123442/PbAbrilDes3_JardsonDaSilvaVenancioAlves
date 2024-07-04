@@ -2,14 +2,11 @@ package br.com.jardson.mscalculate.service;
 
 import br.com.jardson.mscalculate.entity.Rules;
 import br.com.jardson.mscalculate.repository.RulesRepository;
-import br.com.jardson.mscalculate.web.dto.ResponseDto;
 import br.com.jardson.mscalculate.web.dto.mapper.DozerMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RulesService {
@@ -20,6 +17,7 @@ public class RulesService {
     public Rules create(Rules rules) {
         return repository.save(rules);
     }
+
 
     public Rules getRulesById(Long id) {
         return repository.findById(id)

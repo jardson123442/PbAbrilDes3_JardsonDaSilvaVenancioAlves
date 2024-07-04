@@ -2,7 +2,7 @@ package br.com.jardson.mscalculate.web.controller;
 
 import br.com.jardson.mscalculate.entity.Rules;
 import br.com.jardson.mscalculate.service.RulesService;
-import br.com.jardson.mscalculate.web.dto.ResponseDto;
+import br.com.jardson.mscalculate.web.dto.RulesResponseDto;
 import br.com.jardson.mscalculate.web.dto.mapper.DozerMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -36,8 +36,8 @@ public class RulesController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PostMapping
-    public ResponseEntity<ResponseDto> createRule(@RequestBody Rules rules) {
-        ResponseDto response = new ResponseDto();
+    public ResponseEntity<RulesResponseDto> createRule(@RequestBody Rules rules) {
+        RulesResponseDto response = new RulesResponseDto();
         BeanUtils.copyProperties(rules, response);
         service.create(rules);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -51,9 +51,9 @@ public class RulesController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseDto> getById(@PathVariable Long id) {
+    public ResponseEntity<RulesResponseDto> getById(@PathVariable Long id) {
         Rules rules = service.getRulesById(id);
-        ResponseDto customerDto = DozerMapper.toDto(rules);
+        RulesResponseDto customerDto = DozerMapper.toDto(rules);
         return ResponseEntity.ok(customerDto);
     }
 
@@ -79,10 +79,10 @@ public class RulesController {
                             content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
             })
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseDto> update(@PathVariable Long id, @RequestBody Rules rules) {
+    public ResponseEntity<RulesResponseDto> update(@PathVariable Long id, @RequestBody Rules rules) {
         rules = service.update(id, rules);
-        ResponseDto responseDto = DozerMapper.toDto(rules);
-        return ResponseEntity.ok().body(responseDto);
+        RulesResponseDto rulesResponseDto = DozerMapper.toDto(rules);
+        return ResponseEntity.ok().body(rulesResponseDto);
     }
 
     @Operation(summary = "Rule delete", description = "Delete rule",

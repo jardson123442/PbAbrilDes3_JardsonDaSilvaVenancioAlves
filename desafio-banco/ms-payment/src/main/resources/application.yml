@@ -9,7 +9,7 @@ spring:
     password: 1234567
 
   application:
-    name: mspayment
+    name: ms-payment
   rabbitmq:
     port: 5672
     stream:
@@ -24,6 +24,8 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
 
+  main:
+    allow-bean-definition-overriding: true
 #eureka:
 #  client:
 #    service-url:

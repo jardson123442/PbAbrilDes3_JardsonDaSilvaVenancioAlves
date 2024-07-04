@@ -1,17 +1,15 @@
 package br.com.jardson.mspayment.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class CustomerPayment {
+public class Calculate {
 
-    public Customer customer;
-    public Rules category;
-    public Double points;
+    public Long calculateId;
+    public String category;
+    public Double parity;
 }
