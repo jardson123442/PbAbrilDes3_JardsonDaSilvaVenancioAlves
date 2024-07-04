@@ -34,7 +34,7 @@ public class CustomerServiceTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        customer = new Customer(1L, "123.456.789-00", "John Doe", "MALE", null , "john.doe@gmail.com" ,0 ,"null");
+        customer = new Customer(1L, "123.456.789-00", "John Doe", "MALE", new Date(10,10,2000,10, 59,10) , "john.doe@gmail.com" ,0 ,"null");
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CustomerServiceTest {
         assertEquals("John Doe", result.getName());
         assertEquals("123.456.789-00", result.getCpf());
         assertEquals("MALE", result.getGender());
-        assertEquals(null, result.getBirthDate());
+        assertEquals(new Date(10,10,2000,10, 59,10), result.getBirthDate());
         assertEquals("john.doe@gmail.com", result.getEmail());
 
 
