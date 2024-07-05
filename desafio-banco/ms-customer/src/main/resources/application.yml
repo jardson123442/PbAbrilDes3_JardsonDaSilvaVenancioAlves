@@ -25,8 +25,8 @@ spring:
       max-file-size: 200MB
       max-request-size: 215MB
 
-file:
-  upload-dir: /Jardson/upload
+#file:
+#  upload-dir: /Jardson/upload
 
 server:
   port: 8081

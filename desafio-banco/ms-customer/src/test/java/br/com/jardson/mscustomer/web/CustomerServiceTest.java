@@ -17,7 +17,10 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+
 import static org.mockito.Mockito.*;
+
 
 @ExtendWith(MockitoExtension.class)
 public class CustomerServiceTest {
@@ -32,7 +35,7 @@ public class CustomerServiceTest {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+//        MockitoAnnotations.openMocks(this);
 
         customer = new Customer(1L, "123.456.789-00", "John Doe", "MALE", new Date(10,10,2000,10, 59,10) , "john.doe@gmail.com" ,0 ,"null");
     }

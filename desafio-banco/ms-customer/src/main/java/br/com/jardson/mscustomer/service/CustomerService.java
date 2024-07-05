@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerService {
 
-    @Value("${aws.bucket.name}")
-    private String bucketName;
-
-    @Autowired
-    private AmazonS3 s3Client;
+//    @Value("${aws.bucket.name}")
+//    private String bucketName;
+//
+//    @Autowired
+//    private AmazonS3 s3Client;
 
     @Autowired
     public CustomerRepository repository;
