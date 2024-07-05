@@ -1,52 +1,38 @@
 package br.com.jardson.mspayment.web.controller;
 
+import br.com.jardson.mspayment.entity.Calculate;
 import br.com.jardson.mspayment.entity.Customer;
-import br.com.jardson.mspayment.entity.CustomerPayment;
 import br.com.jardson.mspayment.entity.Payment;
 import br.com.jardson.mspayment.entity.Rules;
-import br.com.jardson.mspayment.repository.PaymentRepository;
-import br.com.jardson.mspayment.service.CalculateService;
-import br.com.jardson.mspayment.service.payments.CustomerPaymentService;
-import br.com.jardson.mspayment.service.PaymentService;
-import br.com.jardson.mspayment.service.payments.RulesPayment;
+import br.com.jardson.mspayment.service.CustomerPaymentService;
+import br.com.jardson.mspayment.service.RulesPaymentService;
 import br.com.jardson.mspayment.web.dto.PaymentDto;
 import br.com.jardson.mspayment.web.response.PaymentResponseDto;
+import br.com.jardson.mspayment.web.response.TotalResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/v1/payment")
+@RequestMapping("/v1/payments")
 public class PaymentController {
 
     @Autowired
-    public PaymentService paymentService;
-    @Autowired
-    public RulesPayment rulesPayment;
+    public RulesPaymentService rulesPaymentService;
     @Autowired
     public CustomerPaymentService customerPaymentService;
 
 
 
 //    @PostMapping
-//    public ResponseEntity<PaymentResponseDto> create(@RequestBody PaymentDto dto) {
-//        ResponseEntity<Rules> rules = rulesPayment.getById(dto.getCategoryId());
-//        ResponseEntity<Customer> customer = customerPaymentService.getCustomerPayment(dto.getCustomerId());
+//    public ResponseEntity<PaymentResponseDto> create(@RequestBody PaymentDto paymentDto) {
+//       Customer customer = customerPaymentService.getCustomerPayment(paymentDto.getCustomerId());
+//       Rules rules = rulesPaymentService.getRulesById(paymentDto.getCategoryId());
 //
-//        CustomerPayment customerPayment = new CustomerPayment();
-//        customerPayment.setCustomer(customer.getBody());
-//        customerPayment.setCategory(rules.getBody());
-//        customerPayment.setPoints(dto.getTotal());
-//
-//
-//        PaymentResponseDto response = new PaymentResponseDto();
-//        response.setCustomerId(customerPayment.getCustomer().getId());
-//        response.setPoints(customerPayment.getPoints());
-//        Payment payment = new Payment();
-//        payment.setCustomeriD(customerPayment.getCustomer().getId());
-//        payment.setCategory(customerPayment.getCategory().getId());
-//        payment.setTotal(dto.getTotal());
-//        paymentService.save(payment);
+//       Payment payment = new Payment();
+//       payment.setCategoryId(rules.getId());
+//       payment.setCustomerId(customer.getId());
+//       payment.setTotal();
 //        return ResponseEntity.ok(response);
 //    }
 
@@ -56,5 +42,22 @@ public class PaymentController {
         return ResponseEntity.ok(customerPayment);
     }
 
+    @GetMapping(value = "/rules/{id}")
+    public ResponseEntity<Rules>  getRules(@PathVariable(value = "id") Long id) {
+        Rules rules = rulesPaymentService.getRulesById(id);
+        return ResponseEntity.ok(rules);
+    }
 
+    @PostMapping
+    public ResponseEntity<TotalResponseDto> calculatePoints(@RequestBody Calculate request) {
+        // Validação dos campos obrigatórios
+        if (request.getCategoryId() == null || request.getValue() == null) {
+            throw new IllegalArgumentException("Todos os campos são obrigatórios");
+        }
+        Rules rule = rulesPaymentService.getRulesById(Long.valueOf(request.getCategoryId()));
+        Double parity = rule.getParity() * request.getValue();
+        TotalResponseDto response = new TotalResponseDto();
+        response.setTotal(parity);
+        return ResponseEntity.ok(response);
+    }
 }

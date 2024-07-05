@@ -22,9 +22,9 @@ public class Payment implements Serializable {
     @Id
     private UUID id;
     @Column(name = "CUSTOMER_ID")
-    private Long customeriD;
+    private Long customerId;
     @Column(name = "CATEGORY")
-    private Long category;
+    private Long categoryId;
     @Column(name = "TOTAL")
     private Double total;
     @Column(name = "CREATED_DATE")

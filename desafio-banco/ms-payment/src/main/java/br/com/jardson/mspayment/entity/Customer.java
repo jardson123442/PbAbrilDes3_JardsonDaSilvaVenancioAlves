@@ -14,6 +14,7 @@ import java.util.Date;
 public class Customer {
 
 
+    private Long id;
     private String cpf;
     private String name;
     private String gender;
