@@ -11,6 +11,6 @@ import lombok.ToString;
 @ToString
 public class Calculate {
 
-    public String categoryId;
-    public Double value;
+    public Long categoryId;
+    public Integer value;
 }

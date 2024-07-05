@@ -9,5 +9,5 @@ import lombok.*;
 @ToString
 public class TotalResponseDto {
 
-    public Double total;
+    public Integer total;
 }

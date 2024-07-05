@@ -1,12 +1,14 @@
 package br.com.jardson.mspayment.web.response;
 
-import lombok.Data;
+import lombok.*;
 
-import java.util.UUID;
-
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class PaymentResponseDto {
 
     public Long customerId;
-    public Double points;
+    public Integer points;
 }

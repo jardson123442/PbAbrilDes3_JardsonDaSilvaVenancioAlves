@@ -13,5 +13,5 @@ public class CustomerPayment {
 
     public Customer customer;
     public Rules category;
-    public Double points;
+    public Integer points;
 }

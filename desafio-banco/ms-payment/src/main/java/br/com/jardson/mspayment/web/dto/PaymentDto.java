@@ -7,5 +7,5 @@ public class PaymentDto {
 
     private Long customerId;
     private Long categoryId;
-    private Double total;
+    private Integer total;
 }

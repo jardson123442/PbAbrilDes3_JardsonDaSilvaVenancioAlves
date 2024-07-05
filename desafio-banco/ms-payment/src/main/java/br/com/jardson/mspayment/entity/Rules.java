@@ -17,5 +17,5 @@ public class Rules {
 
     private Long id;
     private String category;
-    private Double parity;
+    private Integer parity;
 }
