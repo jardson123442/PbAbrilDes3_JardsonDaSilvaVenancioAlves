@@ -4,29 +4,34 @@ import br.com.jardson.mspayment.entity.Calculate;
 import br.com.jardson.mspayment.entity.Customer;
 import br.com.jardson.mspayment.entity.Payment;
 import br.com.jardson.mspayment.entity.Rules;
-import br.com.jardson.mspayment.service.CalculatePaymentService;
-import br.com.jardson.mspayment.service.CustomerPaymentService;
+import br.com.jardson.mspayment.service.infra.CalculatePaymentService;
+import br.com.jardson.mspayment.service.infra.CustomerPaymentService;
 import br.com.jardson.mspayment.service.PaymentService;
-import br.com.jardson.mspayment.service.RulesPaymentService;
+import br.com.jardson.mspayment.service.infra.RulesPaymentService;
 import br.com.jardson.mspayment.web.dto.PaymentDto;
 import br.com.jardson.mspayment.web.response.PaymentResponseDto;
-import br.com.jardson.mspayment.web.response.TotalResponseDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/v1/payments")
+@RequiredArgsConstructor
 public class PaymentController {
 
-    @Autowired
-    public RulesPaymentService rulesPaymentService;
-    @Autowired
-    public CustomerPaymentService customerPaymentService;
-    @Autowired
-    public CalculatePaymentService calculatePaymentService;
-    @Autowired
-    public PaymentService paymentService;
+
+    public final RulesPaymentService rulesPaymentService;
+
+    public final CustomerPaymentService customerPaymentService;
+
+    public final CalculatePaymentService calculatePaymentService;
+
+    public final PaymentService paymentService;
 
 
     @PostMapping
@@ -38,9 +43,12 @@ public class PaymentController {
         calculatePaymentService.calculatePoints(calculate);
 
         Payment payment = new Payment();
-        payment.setCategoryId(rules.getId());
-        payment.setCustomerId(customer.getId());
+        payment.setId(UUID.randomUUID().toString());
+        payment.setCategoryId(paymentDto.getCategoryId());
+        payment.setCustomerId(paymentDto.getCustomerId());
         payment.setTotal(customer.getPoints() + (rules.getParity() * paymentDto.getTotal()));
+        payment.setCreatedDate(Instant.now());
+        paymentService.save(payment);
 
         PaymentResponseDto paymentResponseDto = new PaymentResponseDto();
         paymentResponseDto.setCustomerId(paymentDto.getCustomerId());
@@ -49,28 +57,16 @@ public class PaymentController {
         return ResponseEntity.ok(paymentResponseDto);
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable(value = "id") Long id) {
-        Customer customerPayment = customerPaymentService.getCustomerPayment(id);
-        return ResponseEntity.ok(customerPayment);
+    @GetMapping(value = "/user/{id}")
+    public List<Payment> getAllPaymentsByCustomerId(@PathVariable Long id) {
+        return paymentService.findAllPaymentsByCustomerId(id);
     }
 
-    @GetMapping(value = "/rules/{id}")
-    public ResponseEntity<Rules> getRules(@PathVariable(value = "id") Long id) {
-        Rules rules = rulesPaymentService.getRulesById(id);
-        return ResponseEntity.ok(rules);
-    }
-
-//    @PostMapping
-//    public ResponseEntity<TotalResponseDto> calculatePoints(@RequestBody Calculate request) {
-//        // Validação dos campos obrigatórios
-//        if (request.getCategoryId() == null || request.getValue() == null) {
-//            throw new IllegalArgumentException("Todos os campos são obrigatórios");
-//        }
-//        Rules rule = rulesPaymentService.getRulesById(Long.valueOf(request.getCategoryId()));
-//        Double parity = rule.getParity() * request.getValue();
-//        TotalResponseDto response = new TotalResponseDto();
-//        response.setTotal(parity);
-//        return ResponseEntity.ok(response);
+//    @GetMapping(value = "/user/{id}")
+//    public ResponseEntity<Customer> getCustomer(@PathVariable(value = "id") Long id) {
+//        Customer customerPayments = paymentService.findById(id);
+//        return ResponseEntity.ok(customerPayment);
 //    }
+
+
 }

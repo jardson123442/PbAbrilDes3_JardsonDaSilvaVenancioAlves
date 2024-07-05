@@ -1,4 +1,4 @@
-package br.com.jardson.mspayment.service;
+package br.com.jardson.mspayment.service.infra;
 
 import br.com.jardson.mspayment.entity.Customer;
 import org.springframework.cloud.openfeign.FeignClient;

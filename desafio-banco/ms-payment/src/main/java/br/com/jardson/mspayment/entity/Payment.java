@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -22,25 +21,19 @@ public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column
-    private UUID id;
+    private String id;
 
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", nullable = false)
     private Long customerId;
 
-    @Column(name = "category_id")
+    @Column(name = "category_id", nullable = false)
     private Long categoryId;
 
     @Column(name = "total", nullable = false)
-    private Integer total;  // Alterei para Double para corresponder ao cálculo de pontos
+    private Integer total;
 
-    @Column(name = "create_date", updatable = false)
-    private Timestamp createdDate;
-
-    @PrePersist
-    protected void onCreate() {
-        createdDate = new Timestamp(System.currentTimeMillis());
-    }
-
+    @Column(name = "create_date", nullable = false, updatable = false)
+    private Instant createdDate;
 }
