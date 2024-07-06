@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: ms-calculate
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/customers?useTimezone=true&serverTimezone=UTC
@@ -16,8 +18,7 @@ spring:
     stream:
       username: guest
       password: guest
-  application:
-    name: ms-calculate
+
 
 server:
   port: 8080

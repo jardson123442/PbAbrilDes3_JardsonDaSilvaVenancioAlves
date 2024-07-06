@@ -1,26 +1,23 @@
 package br.com.jardson.mscustomer.service;
 
+import br.com.jardson.mscustomer.config.PaymentPointsRequest;
 import br.com.jardson.mscustomer.entity.Customer;
 import br.com.jardson.mscustomer.exception.CpfAlreadyExistsException;
 import br.com.jardson.mscustomer.exception.InvalidGenderException;
 import br.com.jardson.mscustomer.exception.ResourceNotFoundException;
 import br.com.jardson.mscustomer.repository.CustomerRepository;
-import com.amazonaws.services.s3.AmazonS3;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class CustomerService {
 
-//    @Value("${aws.bucket.name}")
-//    private String bucketName;
-//
-//    @Autowired
-//    private AmazonS3 s3Client;
 
-    @Autowired
-    public CustomerRepository repository;
+    final CustomerRepository repository;
+
+    final PaymentPointsRequest paymentPointsRequest;
 
     public Customer getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not found with id " + id));
@@ -55,7 +52,8 @@ public class CustomerService {
     private void updateData(Customer entity, Customer customer) {
         entity.setName(customer.getName());
         entity.setEmail(customer.getEmail());
-        //entity.setBirthDate(customer.getBirthDate());
+        entity.setBirthDate(customer.getBirthDate());
         entity.setGender(customer.getGender());
+        entity.setPoints(customer.getPoints());
     }
 }

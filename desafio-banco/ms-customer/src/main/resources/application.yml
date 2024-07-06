@@ -1,4 +1,6 @@
 spring:
+  main:
+    allow-circular-references: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/customers?useTimezone=true&serverTimezone=UTC
@@ -18,15 +20,18 @@ spring:
     stream:
       username: guest
       password: guest
+    host: localhost
   servlet:
     multipart:
       enabled: true
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-
 #file:
 #  upload-dir: /Jardson/upload
+mq:
+  queues:
+
 
 server:
   port: 8081

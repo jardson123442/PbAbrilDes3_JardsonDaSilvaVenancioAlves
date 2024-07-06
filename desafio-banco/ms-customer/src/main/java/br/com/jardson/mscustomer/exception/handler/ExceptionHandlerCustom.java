@@ -1,6 +1,7 @@
 package br.com.jardson.mscustomer.exception.handler;
 
 import br.com.jardson.mscustomer.exception.*;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,6 +27,12 @@ public class ExceptionHandlerCustom extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }*/
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    private ResponseEntity<Object> handleBadRequest(EmptyResultDataAccessException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(exception.getMessage());
+    }
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public final ResponseEntity<ExceptionResponse> handleNotFoundExceptions(

@@ -7,15 +7,16 @@ import br.com.jardson.mspayment.entity.Rules;
 import br.com.jardson.mspayment.service.infra.CalculatePaymentService;
 import br.com.jardson.mspayment.service.infra.CustomerPaymentService;
 import br.com.jardson.mspayment.service.PaymentService;
-import br.com.jardson.mspayment.service.infra.RulesPaymentService;
 import br.com.jardson.mspayment.web.dto.PaymentDto;
 import br.com.jardson.mspayment.web.response.PaymentResponseDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,9 +24,6 @@ import java.util.UUID;
 @RequestMapping("/v1/payments")
 @RequiredArgsConstructor
 public class PaymentController {
-
-
-    public final RulesPaymentService rulesPaymentService;
 
     public final CustomerPaymentService customerPaymentService;
 
@@ -35,10 +33,10 @@ public class PaymentController {
 
 
     @PostMapping
-    public ResponseEntity<PaymentResponseDto> create(@RequestBody PaymentDto paymentDto) {
+    public ResponseEntity<PaymentResponseDto> create(@RequestBody PaymentDto paymentDto) throws JsonProcessingException {
         Customer customer = customerPaymentService.getCustomerPayment(paymentDto.getCustomerId());
         customer.setPoints(0);
-        Rules rules = rulesPaymentService.getRulesById(paymentDto.getCategoryId());
+        Rules rules = calculatePaymentService.getRulesById(paymentDto.getCategoryId());
         Calculate calculate = new Calculate(paymentDto.getCustomerId(), paymentDto.getTotal());
         calculatePaymentService.calculatePoints(calculate);
 
@@ -47,7 +45,7 @@ public class PaymentController {
         payment.setCategoryId(paymentDto.getCategoryId());
         payment.setCustomerId(paymentDto.getCustomerId());
         payment.setTotal(customer.getPoints() + (rules.getParity() * paymentDto.getTotal()));
-        payment.setCreatedDate(Instant.now());
+        payment.setCreatedDate(LocalDateTime.now());
         paymentService.save(payment);
 
         PaymentResponseDto paymentResponseDto = new PaymentResponseDto();

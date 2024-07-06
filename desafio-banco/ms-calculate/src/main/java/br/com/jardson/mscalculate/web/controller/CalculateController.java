@@ -22,7 +22,7 @@ public class CalculateController {
 
     @PostMapping
     public ResponseEntity<TotalResponseDto> calculatePoints(@RequestBody CalculateRequest request) {
-        // Validação dos campos obrigatórios
+     
         if (request.getCategoryId() == null || request.getValue() == null) {
             throw new IllegalArgumentException("Todos os campos são obrigatórios");
         }
