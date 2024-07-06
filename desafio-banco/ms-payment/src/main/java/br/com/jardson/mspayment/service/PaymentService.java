@@ -23,22 +23,16 @@ public class PaymentService {
     final PaymentRepository paymentRepository;
     final PaymentMq paymentMq;
 
-    public void save(Payment payment) throws JsonProcessingException {
-        PaymentResponseDto responseDto = new PaymentResponseDto();
-        responseDto.setCustomerId(payment.getCustomerId());
-        responseDto.setPoints(payment.getTotal());
-        payment.setCreatedDate(LocalDateTime.now());
-        paymentMq.integration(responseDto);
-        paymentRepository.save(payment);
-    }
-
-    public Payment findById(String id) {
-        return paymentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-    }
-
-    public List<Payment> findAllPayments() {
-        return paymentRepository.findAll();
+    public void save(Payment payment) throws JsonProcessingException, ResourceNotFoundException {
+        if (paymentRepository.findById(payment.getId()).isEmpty()) {
+            throw new ResourceNotFoundException("ID not found");
+        }
+            PaymentResponseDto responseDto = new PaymentResponseDto();
+            responseDto.setCustomerId(payment.getCustomerId());
+            responseDto.setPoints(payment.getTotal());
+            payment.setCreatedDate(LocalDateTime.now());
+            paymentMq.integration(responseDto);
+            paymentRepository.save(payment);
     }
 
     public List<Payment> findAllPaymentsByCustomerId(Long customerId) {

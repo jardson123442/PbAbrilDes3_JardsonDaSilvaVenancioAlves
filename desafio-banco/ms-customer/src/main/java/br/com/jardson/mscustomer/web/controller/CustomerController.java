@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/v1/customers")
-@Tag(name = "People", description = "Endpoints for Managing People")
+@Tag(name = "Customers", description = "Endpoints for Managing Customers")
 public class CustomerController {
 
     @Autowired
