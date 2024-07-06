@@ -30,6 +30,7 @@ public class CustomerService {
         if (!dto.getGender().equalsIgnoreCase("Female") && !dto.getGender().equalsIgnoreCase("Male")) {
             throw new InvalidGenderException("Gender must be either 'Female' or 'Male'.");
         }
+        dto.setPoints(0);
         String imgUrl = null;
         dto.setUrl_photo(imgUrl);
 

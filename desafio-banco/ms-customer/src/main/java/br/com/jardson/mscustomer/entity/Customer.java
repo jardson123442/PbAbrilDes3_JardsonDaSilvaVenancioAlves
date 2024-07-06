@@ -43,7 +43,7 @@ public class Customer implements Serializable {
 
     @Column(unique = true, nullable = false)
     private String email;
-    private Integer points = 0;
+    private Integer points;
     private String url_photo;
 
 }
