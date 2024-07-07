@@ -27,32 +27,23 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-#file:
-#  upload-dir: /Jardson/upload
-mq:
-  queues:
-
-
+#cloud:
+#  aws:
+#    credentials:
+#      access-key: AKIAQ3EGWSUTZVGU2QVY
+#      secret-key: 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
+#    region:
+#      static: us-east-1
+#    stack:
+#      auto: false
+#application:
+#  bucket:
+#    name: jard-bank-photo
+file:
+  upload-dir: /Jardson/upload
 server:
   port: 8081
-
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://banco:123456@localhost:8761/eureka/
-#    fetch-registry: true
-#    register-with-eureka: true
-#    enabled: false
-#  instance:
-#    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-
-
 
   jackson:
     time-zone: America/Sao_Paulo
 
-aws:
-  region: us-east-1
-
-  bucket:
-    name: jard-bank-photo

@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class CustomerService {
 
+    @Autowired
+    CustomerRepository repository;
 
-    final CustomerRepository repository;
-
-    final PaymentPointsRequest paymentPointsRequest;
+    @Autowired
+    PaymentPointsRequest paymentPointsRequest;
 
     public Customer getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not found with id " + id));
@@ -30,10 +30,6 @@ public class CustomerService {
         if (!dto.getGender().equalsIgnoreCase("Female") && !dto.getGender().equalsIgnoreCase("Male")) {
             throw new InvalidGenderException("Gender must be either 'Female' or 'Male'.");
         }
-        dto.setPoints(0);
-        String imgUrl = null;
-        dto.setUrl_photo(imgUrl);
-
         return repository.save(dto);
     }
 
@@ -44,7 +40,6 @@ public class CustomerService {
     }
 
     public void delete(Long id) {
-
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
         repository.delete(entity);

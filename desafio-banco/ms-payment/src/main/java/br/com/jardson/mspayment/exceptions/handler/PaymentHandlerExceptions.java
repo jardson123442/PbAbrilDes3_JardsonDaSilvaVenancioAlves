@@ -19,13 +19,13 @@ import java.util.Date;
 @ControllerAdvice
 public class PaymentHandlerExceptions extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex) {
-
-        ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
-
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(Exception.class)
+//    public final ResponseEntity<ExceptionResponse> handleAllExceptions(Exception ex) {
+//
+//        ExceptionResponse exceptionResponse = new ExceptionResponse(ex.getMessage());
+//
+//        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
@@ -33,8 +33,8 @@ public class PaymentHandlerExceptions extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionResponse("Customer not found"));
     }
 
-    @ExceptionHandler(value = ResourceIntegrationNotFound.class)
-    protected ResponseEntity<Object> handlerResourceIntegrationNotFound(ResourceIntegrationNotFound exception) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ExceptionResponse("Data not found"));
-    }
+//    @ExceptionHandler(value = ResourceIntegrationNotFound.class)
+//    protected ResponseEntity<Object> handlerResourceIntegrationNotFound(ResourceIntegrationNotFound exception) {
+//        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ExceptionResponse("Data not found"));
+//    }
 }

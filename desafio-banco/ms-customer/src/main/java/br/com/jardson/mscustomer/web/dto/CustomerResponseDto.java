@@ -1,6 +1,5 @@
 package br.com.jardson.mscustomer.web.dto;
 
-import br.com.jardson.mscustomer.entity.Customer;
 import lombok.*;
 
 import java.util.Date;

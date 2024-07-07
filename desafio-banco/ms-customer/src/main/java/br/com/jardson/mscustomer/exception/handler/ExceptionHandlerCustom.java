@@ -16,18 +16,6 @@ import java.util.Date;
 @RestController
 public class ExceptionHandlerCustom extends ResponseEntityExceptionHandler {
 
-    /*@ExceptionHandler(Exception.class)
-    public final ResponseEntity<ExceptionResponse> handleAllExceptions(
-            Exception ex, WebRequest request) {
-
-        ExceptionResponse exceptionResponse = new ExceptionResponse(
-                new Date(),
-                ex.getMessage(),
-                request.getDescription(false));
-
-        return new ResponseEntity<>(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-    }*/
-
     @ExceptionHandler(EmptyResultDataAccessException.class)
     private ResponseEntity<Object> handleBadRequest(EmptyResultDataAccessException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)

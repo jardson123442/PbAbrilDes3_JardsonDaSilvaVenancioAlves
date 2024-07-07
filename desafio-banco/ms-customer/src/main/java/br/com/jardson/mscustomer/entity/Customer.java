@@ -6,11 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -44,6 +41,9 @@ public class Customer implements Serializable {
     @Column(unique = true, nullable = false)
     private String email;
     private Integer points;
-    private String url_photo;
+
+    @Lob
+    @Column(length = 1000)
+    private byte[] url_photo;
 
 }
