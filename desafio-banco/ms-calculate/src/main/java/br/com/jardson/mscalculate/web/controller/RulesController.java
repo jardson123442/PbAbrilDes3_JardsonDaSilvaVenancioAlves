@@ -2,7 +2,7 @@ package br.com.jardson.mscalculate.web.controller;
 
 import br.com.jardson.mscalculate.entity.Rules;
 import br.com.jardson.mscalculate.service.RulesService;
-import br.com.jardson.mscalculate.web.dto.RulesResponseDto;
+import br.com.jardson.mscalculate.web.response.RulesResponseDto;
 import br.com.jardson.mscalculate.web.dto.mapper.DozerMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

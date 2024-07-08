@@ -3,7 +3,7 @@ package br.com.jardson.mscustomer.web.controller;
 import br.com.jardson.mscustomer.entity.Customer;
 import br.com.jardson.mscustomer.service.CustomerService;
 import br.com.jardson.mscustomer.web.dto.CustomerDto;
-import br.com.jardson.mscustomer.web.dto.CustomerResponseDto;
+import br.com.jardson.mscustomer.web.response.CustomerResponseDto;
 import br.com.jardson.mscustomer.web.dto.mapper.DozerMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

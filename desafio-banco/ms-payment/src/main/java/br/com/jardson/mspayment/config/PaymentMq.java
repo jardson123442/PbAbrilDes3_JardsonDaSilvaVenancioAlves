@@ -1,7 +1,5 @@
 package br.com.jardson.mspayment.config;
 
-
-import br.com.jardson.mspayment.entity.Payment;
 import br.com.jardson.mspayment.web.response.PaymentResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,5 +22,4 @@ public class PaymentMq {
                 objectMapper.writeValueAsString(payment)
         );
     }
-
 }

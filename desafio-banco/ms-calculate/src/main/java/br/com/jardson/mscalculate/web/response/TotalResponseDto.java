@@ -1,4 +1,4 @@
-package br.com.jardson.mscalculate.web.dto;
+package br.com.jardson.mscalculate.web.response;
 
 import lombok.*;
 

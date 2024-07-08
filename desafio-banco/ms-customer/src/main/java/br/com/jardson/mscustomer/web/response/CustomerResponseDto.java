@@ -1,4 +1,4 @@
-package br.com.jardson.mscustomer.web.dto;
+package br.com.jardson.mscustomer.web.response;
 
 import lombok.*;
 

@@ -3,7 +3,7 @@ package br.com.jardson.mscalculate.web.controller;
 import br.com.jardson.mscalculate.entity.Rules;
 import br.com.jardson.mscalculate.service.RulesService;
 import br.com.jardson.mscalculate.web.dto.CalculateRequest;
-import br.com.jardson.mscalculate.web.dto.TotalResponseDto;
+import br.com.jardson.mscalculate.web.response.TotalResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

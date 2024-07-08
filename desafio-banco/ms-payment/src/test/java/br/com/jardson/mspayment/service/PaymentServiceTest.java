@@ -1,10 +1,9 @@
-package br.com.jardson.mspayment.web;
+package br.com.jardson.mspayment.service;
 
 import br.com.jardson.mspayment.config.PaymentMq;
 import br.com.jardson.mspayment.entity.Payment;
 import br.com.jardson.mspayment.exceptions.ResourceNotFoundException;
 import br.com.jardson.mspayment.repository.PaymentRepository;
-import br.com.jardson.mspayment.service.PaymentService;
 import br.com.jardson.mspayment.web.response.PaymentResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeEach;

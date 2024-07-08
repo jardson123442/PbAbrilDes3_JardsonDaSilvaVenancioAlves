@@ -2,7 +2,7 @@ package br.com.jardson.mscustomer.web.dto.mapper;
 
 import br.com.jardson.mscustomer.entity.Customer;
 import br.com.jardson.mscustomer.web.dto.CustomerDto;
-import br.com.jardson.mscustomer.web.dto.CustomerResponseDto;
+import br.com.jardson.mscustomer.web.response.CustomerResponseDto;
 import org.modelmapper.ModelMapper;
 
 public class DozerMapper {
@@ -15,9 +15,4 @@ public class DozerMapper {
         ModelMapper mapper = new ModelMapper();
         return mapper.map(customer, CustomerResponseDto.class);
     }
-
-//    public static <O, D> D parseObject(O origin, Class<D> destination)
-//    {
-//        return mapper.map(origin, destination);
-//    }
 }

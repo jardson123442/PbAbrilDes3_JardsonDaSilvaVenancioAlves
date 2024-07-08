@@ -2,22 +2,15 @@ package br.com.jardson.mspayment.service;
 
 import br.com.jardson.mspayment.config.PaymentMq;
 import br.com.jardson.mspayment.entity.Payment;
-import br.com.jardson.mspayment.entity.User;
 import br.com.jardson.mspayment.exceptions.ResourceNotFoundException;
 import br.com.jardson.mspayment.repository.PaymentRepository;
 import br.com.jardson.mspayment.web.response.PaymentResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import lombok.RequiredArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-
 
 @Service
 public class PaymentService {

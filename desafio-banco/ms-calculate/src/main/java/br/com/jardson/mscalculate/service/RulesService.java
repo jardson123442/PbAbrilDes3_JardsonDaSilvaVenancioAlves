@@ -19,7 +19,6 @@ public class RulesService {
         return repository.save(rules);
     }
 
-
     public Rules getRulesById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));

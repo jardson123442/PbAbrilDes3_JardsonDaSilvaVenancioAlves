@@ -45,5 +45,4 @@ public class Customer implements Serializable {
     @Lob
     @Column(length = 1000)
     private byte[] url_photo;
-
 }

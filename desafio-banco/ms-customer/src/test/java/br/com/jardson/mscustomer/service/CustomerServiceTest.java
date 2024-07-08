@@ -1,14 +1,11 @@
-package br.com.jardson.mscustomer.web;
+package br.com.jardson.mscustomer.service;
 
 import br.com.jardson.mscustomer.entity.Customer;
 import br.com.jardson.mscustomer.exception.CpfAlreadyExistsException;
 import br.com.jardson.mscustomer.exception.InvalidGenderException;
-import br.com.jardson.mscustomer.exception.RequiredObjectIsNullException;
 import br.com.jardson.mscustomer.exception.ResourceNotFoundException;
 import br.com.jardson.mscustomer.repository.CustomerRepository;
 import br.com.jardson.mscustomer.service.CustomerService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +18,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.mockito.Mockito.*;
 
