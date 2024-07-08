@@ -40,7 +40,6 @@ public class RulesService {
         return DozerMapper.parseListObjects(repository.findAll(), Rules.class);
     }
 
-
     private void updateData(Rules entity, Rules rules) {
         entity.setCategory(rules.getCategory());
         entity.setParity(rules.getParity());

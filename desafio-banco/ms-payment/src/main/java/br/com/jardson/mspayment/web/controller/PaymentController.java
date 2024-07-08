@@ -28,16 +28,18 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/v1/payments")
 @Tag(name = "Payments", description = "Endpoints for Managing Payments")
 public class PaymentController {
 
-    public final CustomerPaymentService customerPaymentService;
+    @Autowired
+    public CustomerPaymentService customerPaymentService;
 
-    public final CalculatePaymentService calculatePaymentService;
+    @Autowired
+    public CalculatePaymentService calculatePaymentService;
 
-    public final PaymentService paymentService;
+    @Autowired
+    public PaymentService paymentService;
 
     @Operation(summary = "New payment", description = "Resource to pay",
             responses = {

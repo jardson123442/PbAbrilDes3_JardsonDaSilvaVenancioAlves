@@ -9,6 +9,7 @@ import br.com.jardson.mspayment.web.response.PaymentResponseDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -17,22 +18,24 @@ import java.util.List;
 
 
 @Service
-@RequiredArgsConstructor
 public class PaymentService {
 
-    final PaymentRepository paymentRepository;
-    final PaymentMq paymentMq;
+    @Autowired
+    PaymentRepository paymentRepository;
+
+    @Autowired
+    PaymentMq paymentMq;
 
     public void save(Payment payment) throws JsonProcessingException {
-            PaymentResponseDto responseDto = new PaymentResponseDto();
+        if (payment.getCustomerId() == null || paymentRepository.existsById(payment.getId()) ) {
+            throw new ResourceNotFoundException("Customer not found");
+        }
+        PaymentResponseDto responseDto = new PaymentResponseDto();
             responseDto.setCustomerId(payment.getCustomerId());
             responseDto.setPoints(payment.getTotal());
             payment.setCreatedDate(LocalDateTime.now());
             paymentMq.integration(responseDto);
             paymentRepository.save(payment);
-            if (payment.getCustomerId() == null || paymentRepository.existsById(payment.getId()) ) {
-                throw new ResourceNotFoundException("Customer not found");
-            }
     }
 
     public List<Payment> findAllPaymentsByCustomerId(Long customerId) {
