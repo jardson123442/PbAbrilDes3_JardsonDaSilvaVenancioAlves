@@ -1,4 +1,5 @@
 <h1 align="center">American Bank API</h1><br>
+<h2 align="center">JARDSON VENÂNCIO</h2><br>
 
 ## `Index`
 
@@ -13,6 +14,7 @@ RabbitMQ was used to send the points that the customer accumulated after purchas
 
 ## `Application Features and Demonstration`
 
+# `Customers:`<br>
 ### `Registrations:`<br>
 
 This is where customer registration is done with the following fields.
@@ -58,6 +60,8 @@ Update customer information.
 Delete a customer.
 
 - `DELETE -` http://localhost:8082/v1/customers/{id}
+
+# `Calculate:`<br>
 
 ### `Register New Rule:`<br>
 
@@ -110,6 +114,7 @@ Here we delete the rule.
 
 - `DELETE -` http://localhost:8080/v1/rules/{id} <br>
 
+# `Payment:`<br>
 
 ### `Make a Pay:`<br>
 
