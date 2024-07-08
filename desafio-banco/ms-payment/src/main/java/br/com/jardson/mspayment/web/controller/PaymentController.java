@@ -71,6 +71,26 @@ public class PaymentController {
         return ResponseEntity.ok(paymentResponseDto);
     }
 
+    @Operation(summary = "Retrieve a payment by id", description = "Resource to find a payment by id",
+              responses = {
+        @ApiResponse(responseCode = "200", description = "Payment retrieved successfully",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = PaymentResponseDto.class))),
+        @ApiResponse(responseCode = "404", description = "Payment not found",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+    })
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Payment> getPaymentsById(@PathVariable(value = "id") String id) {
+        Payment payment = paymentService.findPaymentById(id);
+        return ResponseEntity.ok(payment);
+    }
+
+    @Operation(summary = "Retrieve customer payments by id", description = "Resource to find a customer payment by id",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Payment retrieved successfully",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = PaymentResponseDto.class))),
+                    @ApiResponse(responseCode = "404", description = "Customer payment not found",
+                            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class)))
+            })
     @GetMapping(value = "/user/{id}")
     public List<Payment> getAllPaymentsByCustomerId(@PathVariable Long id) {
         return paymentService.findAllPaymentsByCustomerId(id);

@@ -17,6 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,7 +47,6 @@ public class PaymentServiceTest {
         payment.setCategoryId(1L);
         payment.setCreatedDate(LocalDateTime.now());
     }
-
 
     @Test
     public void testSavePaymentSuccess() throws JsonProcessingException {
@@ -84,8 +84,29 @@ public class PaymentServiceTest {
     }
 
     @Test
+    public void testFindPaymentById() {
+        when(paymentRepository.findById(payment.getId())).thenReturn(Optional.of(payment));
+
+        Payment foundPayment = paymentService.findPaymentById(payment.getId());
+
+        assertEquals(payment.getId(), foundPayment.getId());
+        assertEquals(payment.getCustomerId(), foundPayment.getCustomerId());
+        assertEquals(payment.getTotal(), foundPayment.getTotal());
+        assertEquals(payment.getCategoryId(), foundPayment.getCategoryId());
+        assertEquals(payment.getCreatedDate(), foundPayment.getCreatedDate());
+    }
+
+    @Test
+    public void testFindPaymentByIdNotFound() {
+        when(paymentRepository.findById(anyString())).thenReturn(Optional.empty());
+
+        Payment foundPayment = paymentService.findPaymentById(UUID.randomUUID().toString());
+
+        assertNull(foundPayment);
+    }
+
+    @Test
     public void testFindAllPaymentsByCustomerIdReturnsPayments() {
-        // Simulate finding payments for customer 1L
         List<Payment> mockPayments = new ArrayList<>();
         mockPayments.add(payment);
         when(paymentRepository.findByCustomerId(1L)).thenReturn(mockPayments);
@@ -95,12 +116,10 @@ public class PaymentServiceTest {
         assertEquals(1, foundPayments.size());
         assertEquals(payment.getId(), foundPayments.get(0).getId());
         assertEquals(payment.getCustomerId(), foundPayments.get(0).getCustomerId());
-        // Add more assertions as needed
     }
 
     @Test
     public void testFindAllPaymentsByCustomerIdReturnsEmptyList() {
-        // Simulate no payments found for customer 2L
         when(paymentRepository.findByCustomerId(2L)).thenReturn(new ArrayList<>());
 
         List<Payment> foundPayments = paymentService.findAllPaymentsByCustomerId(2L);

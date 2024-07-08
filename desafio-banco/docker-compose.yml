@@ -1,4 +1,16 @@
 services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - bank-network
+
   db:
     image: mysql:8.0.29
     command: mysqld --default-authentication-plugin=mysql_native_password
@@ -25,10 +37,15 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/customers?useTimezone=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: docker
       SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
     ports:
       - 8081:8081
     depends_on:
       - db
+      - rabbitmq
     networks:
       - bank-network
 
@@ -37,16 +54,21 @@ services:
     restart: always
     build: ./ms-calculate
     working_dir: /ms-calculate
-    ports:
-      - 8080:8080
     environment:
       TZ: America/Sao_Paulo
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/customers?useTimezone=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: docker
       SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    ports:
+      - 8080:8080
     command: mvn spring-boot:run
     depends_on:
       - db
+      - rabbitmq
     networks:
       - bank-network
 
@@ -55,16 +77,25 @@ services:
     restart: always
     build: ./ms-payment
     working_dir: /ms-payment
-    ports:
-      - 8082:8082
     environment:
       TZ: America/Sao_Paulo
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/customers?useTimezone=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: docker
       SPRING_DATASOURCE_PASSWORD: admin123
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      CALCULATE_SERVICE_URL: http://calculate:8080
+      CUSTOMERS_SERVICE_URL: http://customers:8081
+    ports:
+      - 8082:8082
     command: mvn spring-boot:run
     depends_on:
       - db
+      - rabbitmq
+      - calculate
+      - customers
     networks:
       - bank-network
 

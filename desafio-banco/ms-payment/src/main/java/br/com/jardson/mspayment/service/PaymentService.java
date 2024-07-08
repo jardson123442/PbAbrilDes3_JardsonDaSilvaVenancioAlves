@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -40,5 +42,9 @@ public class PaymentService {
 
     public List<Payment> findAllPaymentsByCustomerId(Long customerId) {
         return paymentRepository.findByCustomerId(customerId);
+    }
+
+    public Payment findPaymentById(String paymentId) {
+        return paymentRepository.findById(paymentId).orElse(null);
     }
 }

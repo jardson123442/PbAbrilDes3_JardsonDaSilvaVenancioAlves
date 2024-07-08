@@ -135,7 +135,6 @@ public class CustomerServiceTest {
         verifyNoMoreInteractions(repository);
     }
 
-
     @Test
     void testUpdate() {
         Customer customer = new Customer();
