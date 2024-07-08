@@ -5,6 +5,7 @@
 * [Project Description](#project-description)
 * [Application Features and Demonstration](#application-features-and-demonstration)
 * [Jacoco Tests](#application-features-and-demonstration)
+* [Docker Compose](#application-features-and-demonstration)
 
 ## `Project Description`
 <p>This project was created to simulate a bank with some basic functionalities.<br> 
@@ -52,41 +53,14 @@ Update customer information.
 }
 ```
 
-
 ### `Delete:`<br>
 
 Delete a customer.
 
 - `DELETE -` http://localhost:8082/v1/customers/{id}
 
-### `Make a Purchase:`<br>
-
-- `POST -` http://localhost:8082/v1/payments <br>
-
-This is where a purchase is made, and the customer's points are added to their database.
-
-```
-{
-  "customerId": 0,
-  "categoryId": 0,
-  "total": 0000
-}
-```
-### `Search Payments by Id:`<br>
-
-Here we search for payments by id.
-
-- `GET -` http://localhost:8082/v1/payments/{id}<br>
-
-### `Search Customer Payments by Id:`<br>
-
-Here we search for customer payments by id.
-
-- `GET -` http://localhost:8082/v1/payments/user/1 <br>
-
 ### `Register New Rule:`<br>
 
-### `Create Rules:`<br>
 
 - `POST -` http://localhost:8080/v1/rules <br>
 
@@ -134,6 +108,48 @@ Here we update the rule.
 
 Here we delete the rule.
 
-- `DELETE -` http://localhost:8080/v1/rules <br>
+- `DELETE -` http://localhost:8080/v1/rules/{id} <br>
 
+
+### `Make a Pay:`<br>
+
+- `POST -` http://localhost:8082/v1/payments <br>
+
+This is where a purchase is made, and the customer's points are added to their database.
+
+```
+{
+  "customerId": 0,
+  "categoryId": 0,
+  "total": 0000
+}
+```
+### `Search Payments by Id:`<br>
+
+Here we search for payments by id.
+
+- `GET -` http://localhost:8082/v1/payments/{id}<br>
+
+### `Search Customer Payments by Id:`<br>
+
+Here we search for customer payments by id.
+
+- `GET -` http://localhost:8082/v1/payments/user/1 <br>
+
+
+## `Jacoco Tests`
+### `Customers:`<br>
+![Customer Jacoco Tests](https://i.imgur.com/8PM071F.png)
+### `Calculate:`<br>
+![Customer Jacoco Tests](https://i.imgur.com/lIEsAd7.png)
+### `Payments:`<br>
+![Customer Jacoco Tests](https://i.imgur.com/tI0gs50.png)
+
+## `Docker compose`
+
+### `First Step:`<br>
+Navigate to the root directory of all microservices and run the following command: `mvn clean package`
+
+### `Second Step:`<br>
+Go to the directory containing the `docker-compose.yml` file and run: `docker-compose up -d --build`
 
