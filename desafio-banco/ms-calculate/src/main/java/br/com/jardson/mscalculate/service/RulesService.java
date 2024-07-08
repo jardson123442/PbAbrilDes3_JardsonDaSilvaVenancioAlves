@@ -1,6 +1,7 @@
 package br.com.jardson.mscalculate.service;
 
 import br.com.jardson.mscalculate.entity.Rules;
+import br.com.jardson.mscalculate.exception.ResourceNotFoundException;
 import br.com.jardson.mscalculate.repository.RulesRepository;
 import br.com.jardson.mscalculate.web.dto.mapper.DozerMapper;
 import org.springframework.beans.factory.annotation.Autowired;

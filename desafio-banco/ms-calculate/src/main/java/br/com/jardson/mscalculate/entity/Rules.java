@@ -25,5 +25,5 @@ public class Rules implements Serializable {
     private String category;
 
     @Column(nullable = false, length = 3)
-    private Double parity;
+    private Integer parity;
 }

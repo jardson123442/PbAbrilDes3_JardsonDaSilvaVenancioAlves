@@ -1,9 +1,8 @@
-package br.com.jardson.mscalculate.service;
-
-import org.springframework.data.crossstore.ChangeSetPersister;
+package br.com.jardson.mscalculate.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
 
     public ResourceNotFoundException(String s) {
+        super(s);
     }
 }

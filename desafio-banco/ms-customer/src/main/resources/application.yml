@@ -27,18 +27,12 @@ spring:
       file-size-threshold: 2KB
       max-file-size: 200MB
       max-request-size: 215MB
-#cloud:
-#  aws:
-#    credentials:
-#      access-key: AKIAQ3EGWSUTZVGU2QVY
-#      secret-key: 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
-#    region:
-#      static: us-east-1
-#    stack:
-#      auto: false
-#application:
-#  bucket:
-#    name: jard-bank-photo
+
+#aws:
+#  accessKeyId: AKIAQ3EGWSUTZVGU2QVY
+#  secretKey: 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
+#  region: us-east-1
+
 file:
   upload-dir: /Jardson/upload
 server:

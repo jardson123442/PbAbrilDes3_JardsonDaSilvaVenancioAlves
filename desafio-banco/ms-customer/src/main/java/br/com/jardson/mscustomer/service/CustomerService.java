@@ -24,6 +24,7 @@ public class CustomerService {
     }
 
     public Customer save(Customer dto) {
+        dto.setPoints(0);
         if (repository.existsCustomerByCpf(dto.getCpf())) {
             throw new CpfAlreadyExistsException("CPF already exists.");
         }
