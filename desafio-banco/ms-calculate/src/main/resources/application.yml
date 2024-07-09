@@ -3,9 +3,9 @@ spring:
     name: ms-calculate
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/customers?useTimezone=true&serverTimezone=UTC
-    username: root
-    password: 1234567
+    url: jdbc:mysql://jardson-db-bank.cx4a8qo42etd.us-east-1.rds.amazonaws.com:3306/customers?useTimezone=true&serverTimezone=UTC
+    username: admin
+    password: admin123
   jpa:
     hibernate:
       ddl-auto: update
